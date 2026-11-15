@@ -61,6 +61,7 @@ const ui = {
   published: { en: "Published", id: "Terbit" },
   textSize: { en: "Text size", id: "Ukuran teks" },
   managedBy: { en: "SKALA is managed by DT Global", id: "SKALA dikelola oleh DT Global" },
+  prototypeBy: { en: "Prototype by", id: "Prototipe oleh" },
   partnership: {
     en: "SKALA is an Australia–Indonesia partnership programme supporting basic service delivery in subnational governments.",
     id: "SKALA adalah program kemitraan Australia–Indonesia yang mendukung percepatan layanan dasar di pemerintah daerah.",
