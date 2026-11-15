@@ -8,7 +8,7 @@ export default async function Search({ params }: { params: Promise<{ lang: strin
   const lang = (isLang(raw) ? raw : "id") as Lang;
   return (
     <>
-      <PageHero title={tr("search", lang)} crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("search", lang) }]} />
+      <PageHero lang={lang} info="siteSearch" title={tr("search", lang)} crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("search", lang) }]} />
       <Suspense><SiteSearch lang={lang} /></Suspense>
     </>
   );

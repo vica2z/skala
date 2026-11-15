@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Info from "@/components/Info";
+import YouTube from "@/components/YouTube";
 import { isLang, t, tr, type Lang } from "@/lib/i18n";
-import { dataSystems, outcomes, podcasts, posts, provinces, publications, testimonials } from "@/lib/data";
+import { SAMPLE_YT, dataSystems, outcomes, podcasts, posts, provinces, publications, testimonials } from "@/lib/data";
 import { PostCard, PubCard } from "@/components/ui";
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
@@ -23,7 +25,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-tight">
               {lang === "id" ? "Layanan dasar yang lebih baik untuk setiap daerah" : "Better basic services for every region"}
             </h1>
-            <p className="mt-5 text-lg text-brand-100 max-w-2xl">{tr("partnership", lang)}</p>
+            <p className="mt-5 text-lg text-brand-100 max-w-2xl">{tr("partnership", lang)} <Info k="responsive" lang={lang} tone="dark" /></p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={`/${lang}/publications`} className="rounded-full bg-accent-400 px-6 py-3 font-bold text-ink hover:bg-accent-500">{tr("publications", lang)}</Link>
               <Link href={`/${lang}/about`} className="rounded-full border border-white/40 px-6 py-3 font-semibold hover:bg-white/10">{tr("about", lang)}</Link>
@@ -48,7 +50,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <section className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-end justify-between">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("latestNews", lang)}</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("latestNews", lang)} <Info k="news" lang={lang} /></h2>
           <Link className="font-semibold text-brand-700 hover:underline" href={`/${lang}/activities`}>{tr("viewAll", lang)} →</Link>
         </div>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -59,7 +61,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 py-16">
           <div className="flex items-end justify-between">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("latestPubs", lang)}</h2>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("latestPubs", lang)} <Info k="repository" lang={lang} /></h2>
             <Link className="font-semibold text-brand-700 hover:underline" href={`/${lang}/publications`}>{tr("viewAll", lang)} →</Link>
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -69,12 +71,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("whereWeWork", lang)}</h2>
-        <p className="mt-2 text-slate-600">{lang === "id" ? "Klik provinsi untuk melihat publikasinya." : "Select a province to see its publications."}</p>
+        <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("whereWeWork", lang)} <Info k="map" lang={lang} /></h2>
+        <p className="mt-2 text-slate-600">{lang === "id" ? "Klik provinsi untuk melihat profilnya." : "Select a province to see its profile."}</p>
         <div className="mt-6 rounded-2xl border border-slate-200 bg-gradient-to-br from-sky-50 to-brand-50 p-4">
           <svg viewBox="0 0 1000 400" className="w-full h-auto" role="img" aria-label={tr("whereWeWork", lang)}>
             {provinces.map((p) => (
-              <a key={p.slug} href={`/${lang}/publications?province=${p.slug}`}>
+              <a key={p.slug} href={`/${lang}/provinces/${p.slug}`}>
                 <circle cx={X(p.lng)} cy={Y(p.lat)} r="11" className="fill-brand-500/30" />
                 <circle cx={X(p.lng)} cy={Y(p.lat)} r="5" className="fill-brand-700" />
                 <text x={X(p.lng) + (off[p.slug]?.[0] ?? 10)} y={Y(p.lat) + (off[p.slug]?.[1] ?? -10)} textAnchor={off[p.slug]?.[2] ?? "start"} fontSize="15" className="fill-ink font-semibold">{t(p.name, lang)}</text>
@@ -86,7 +88,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <section className="bg-brand-50">
         <div className="mx-auto max-w-7xl px-4 py-16">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("goal", lang)}</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("goal", lang)} <Info k="outcomes" lang={lang} /></h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {outcomes.map((o, i) => (
               <div key={i} className="rounded-2xl bg-white p-6 border border-brand-100">
@@ -99,7 +101,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("dataSystems", lang)}</h2>
+        <h2 className="text-2xl md:text-3xl font-extrabold text-brand-900">{tr("dataSystems", lang)} <Info k="dataSystems" lang={lang} /></h2>
         <ul className="mt-6 flex flex-wrap gap-3">
           {dataSystems.map((d) => <li key={d} className="rounded-xl border border-slate-200 px-5 py-3 font-bold text-slate-700">{d}</li>)}
         </ul>
@@ -107,18 +109,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <section className="mx-auto max-w-7xl px-4 pb-16 grid gap-8 lg:grid-cols-2">
         <div className="rounded-2xl bg-ink text-white p-8">
-          <h2 className="text-2xl font-extrabold">{tr("ourPodcast", lang)}</h2>
+          <h2 className="text-2xl font-extrabold">{tr("ourPodcast", lang)} <Info k="podcast" lang={lang} tone="dark" /></h2>
+          <div className="mt-5"><YouTube id={SAMPLE_YT} title={t(podcasts[0].title, lang)} lang={lang} /></div>
           <ul className="mt-5 space-y-3">
             {podcasts.map((p) => (
               <li key={p.slug} className="flex items-center gap-3">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent-400 text-ink" aria-hidden>▶</span>
-                <Link className="hover:underline" href={`/${lang}/media`}>{t(p.title, lang)}</Link>
+                <Link className="hover:underline" href={`/${lang}/podcasts/${p.slug}`}>{t(p.title, lang)}</Link>
               </li>
             ))}
           </ul>
         </div>
         <div className="rounded-2xl border border-slate-200 p-8">
-          <h2 className="text-2xl font-extrabold text-brand-900">{tr("testimonials", lang)}</h2>
+          <h2 className="text-2xl font-extrabold text-brand-900">{tr("testimonials", lang)} <Info k="testimonials" lang={lang} /></h2>
           {testimonials.map((q, i) => (
             <figure key={i} className="mt-5">
               <blockquote className="text-lg">“{t(q.quote, lang)}”</blockquote>
@@ -131,7 +134,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section className="mx-auto max-w-7xl px-4">
         <div className="rounded-3xl bg-gradient-to-r from-brand-600 to-brand-900 text-white p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <h2 className="text-2xl font-extrabold">{tr("getInTouch", lang)}</h2>
+            <h2 className="text-2xl font-extrabold">{tr("getInTouch", lang)} <Info k="whatsapp" lang={lang} tone="dark" /></h2>
             <p className="mt-1 text-brand-100">{lang === "id" ? "Dapatkan kabar terbaru SKALA langsung di ponsel Anda." : "Get SKALA news straight to your phone."}</p>
           </div>
           <a href="#" className="rounded-full bg-white text-brand-900 px-6 py-3 font-bold">{tr("whatsapp", lang)}</a>

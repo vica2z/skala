@@ -1,4 +1,5 @@
 import { isLang, t, type Lang } from "@/lib/i18n";
+import Info from "@/components/Info";
 import { publications, pubTypes } from "@/lib/data";
 
 export const metadata = { title: "CMS preview" };
@@ -11,14 +12,14 @@ export default async function Admin({ params }: { params: Promise<{ lang: string
   return (
     <div className="mx-auto max-w-7xl px-4 py-10">
       <p className="rounded-lg bg-amber-50 border border-amber-200 px-4 py-2 text-sm">{lang === "id" ? "Tampilan contoh panel editor CMS (headless). Tidak ada data nyata." : "Sample view of the headless CMS editor panel. No real data."}</p>
-      <div className="mt-6 grid gap-6 lg:grid-cols-5">
+      <div className="mt-6 grid gap-6 lg:grid-cols-5 [&>*]:min-w-0">
         <aside className="rounded-2xl bg-brand-900 text-brand-100 p-5 space-y-2 text-sm lg:col-span-1">
-          <p className="text-white font-bold mb-3">SKALA CMS</p>
+          <p className="text-white font-bold mb-3 flex items-center gap-2">SKALA CMS <Info k="cms" lang={lang} tone="dark" /></p>
           {["Dashboard", "Publications", "Activities", "Glossary", "Media library", "Translations", "Users & roles", "Audit log"].map((m, i) => (
             <p key={m} className={`rounded-lg px-3 py-2 ${i === 1 ? "bg-white/15 text-white" : ""}`}>{m}</p>
           ))}
         </aside>
-        <section className="lg:col-span-4 space-y-6">
+        <section className="lg:col-span-4 space-y-6 min-w-0">
           <div className="grid gap-4 sm:grid-cols-4">
             {[["Draft → Review → Publish", "3-step workflow"], ["ID / EN", "Translation status"], ["4 roles", "Admin, Editor, Author, Translator"], ["Audit log", "Every change tracked"]].map(([a, b]) => (
               <div key={a} className="rounded-xl border border-slate-200 p-4"><p className="font-bold">{a}</p><p className="text-xs text-slate-500">{b}</p></div>

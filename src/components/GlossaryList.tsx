@@ -1,5 +1,6 @@
 "use client";
 
+import Info from "@/components/Info";
 import { useMemo, useState } from "react";
 import { tr, type Lang } from "@/lib/i18n";
 import { glossary } from "@/lib/data";
@@ -27,6 +28,7 @@ export default function GlossaryList({ lang }: { lang: Lang }) {
           placeholder={lang === "id" ? "Cari singkatan atau artinya…" : "Search an acronym or its meaning…"}
           className="grow rounded-full border border-slate-300 px-5 py-3" />
         <button onClick={() => { setOpen(true); setSent(false); }} className="rounded-full bg-brand-600 text-white px-5 py-3 font-semibold">{tr("suggest", lang)}</button>
+        <Info k="suggest" lang={lang} align="right" />
       </div>
       <nav aria-label="A–Z" className="mt-5 flex flex-wrap gap-1">
         <button onClick={() => setLetter("")} aria-pressed={!letter} className={`h-9 px-3 rounded-lg text-sm font-semibold ${!letter ? "bg-brand-600 text-white" : "hover:bg-brand-50"}`}>{tr("all", lang)}</button>

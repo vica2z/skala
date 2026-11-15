@@ -175,3 +175,43 @@ export const testimonials: { quote: L; who: L }[] = [
   { quote: { en: "Data now drives our budget debates, not the other way round.", id: "Kini data yang mengarahkan pembahasan anggaran kami, bukan sebaliknya." }, who: { en: "Head of Bappeda (sample)", id: "Kepala Bappeda (contoh)" } },
   { quote: { en: "Our villages finally appear in the provincial plan.", id: "Desa-desa kami akhirnya masuk dalam rencana provinsi." }, who: { en: "District planner (sample)", id: "Perencana kabupaten (contoh)" } },
 ];
+
+export const pubTypeIntro: Record<PubType, L> = {
+  briefs: { en: "Short policy briefs that distil evidence for decision makers.", id: "Ringkasan kebijakan singkat yang merangkum bukti untuk pengambil keputusan." },
+  infographics: { en: "Visual summaries of data, processes and results.", id: "Ringkasan visual tentang data, proses, dan hasil." },
+  "lessons-learned": { en: "What worked, what didn't, and what we would do differently.", id: "Apa yang berhasil, apa yang tidak, dan apa yang akan kami lakukan berbeda." },
+  newsletter: { en: "HALO SKALA: news and stories from across the programme.", id: "HALO SKALA: kabar dan cerita dari seluruh program." },
+  "provincial-profiles": { en: "SKALA's work and results in each partner province.", id: "Kerja dan hasil SKALA di setiap provinsi mitra." },
+  reports: { en: "Progress reports, reviews and research.", id: "Laporan kemajuan, tinjauan, dan riset." },
+  strategies: { en: "The strategies that guide how SKALA works.", id: "Strategi yang memandu cara kerja SKALA." },
+  stories: { en: "Real stories of change from districts and villages.", id: "Kisah nyata perubahan dari kabupaten dan desa." },
+};
+
+export const podcastDetail: Record<string, { guests: L; minutes: number; date: string; summary: L }> = {
+  "breaking-boundaries": { guests: { en: "Disability rights advocates", id: "Pegiat hak penyandang disabilitas" }, minutes: 42, date: "2026-09-12",
+    summary: { en: "Guests talk about identity, disability and how stereotypes are changing in local government services.", id: "Narasumber membahas identitas, disabilitas, dan perubahan stereotip dalam layanan pemerintah daerah." } },
+  "elderly-issues": { guests: { en: "Kompas and Bappenas", id: "Kompas dan Bappenas" }, minutes: 35, date: "2026-07-04",
+    summary: { en: "Indonesia is ageing fast. What does that mean for regional budgets and services?", id: "Indonesia menua dengan cepat. Apa artinya bagi anggaran dan layanan daerah?" } },
+  regsosek: { guests: { en: "Director of Poverty Alleviation, Bappenas", id: "Direktur Penanggulangan Kemiskinan, Bappenas" }, minutes: 38, date: "2026-05-20",
+    summary: { en: "How socio-economic registration data supports better targeting of social programmes.", id: "Bagaimana data registrasi sosial ekonomi mendukung penargetan program sosial yang lebih baik." } },
+};
+
+// Sample YouTube video ID (an Australia–Indonesia collaboration video, used as a placeholder).
+// Replace with the IDs of SKALA's own videos: the ID is the part after "watch?v=" in a YouTube link.
+export const SAMPLE_YT = "LzoNxRVtPcM";
+
+export const videos: { slug: string; cat: "event" | "explainer" | "story"; title: L; minutes: number; youtube: string }[] = [
+  { slug: "v-sigap", cat: "story", title: { en: "SIGAP: Village Data in Aceh", id: "SIGAP: Data Desa di Aceh" }, minutes: 4, youtube: SAMPLE_YT },
+  { slug: "v-dashboard", cat: "story", title: { en: "NTB Executive Dashboard Launch", id: "Peluncuran Dasbor Eksekutif NTB" }, minutes: 3, youtube: SAMPLE_YT },
+  { slug: "v-cycle", cat: "explainer", title: { en: "The Governance Strengthening Cycle", id: "Siklus Penguatan Tata Kelola" }, minutes: 6, youtube: SAMPLE_YT },
+  { slug: "v-mss", cat: "explainer", title: { en: "Minimum Service Standards Explained", id: "Penjelasan Standar Pelayanan Minimal" }, minutes: 5, youtube: SAMPLE_YT },
+  { slug: "v-grb", cat: "explainer", title: { en: "What Is Gender Responsive Budgeting?", id: "Apa Itu Anggaran Responsif Gender?" }, minutes: 4, youtube: SAMPLE_YT },
+  { slug: "v-forum", cat: "event", title: { en: "Papua Data Forum Highlights", id: "Sorotan Forum Data Papua" }, minutes: 7, youtube: SAMPLE_YT },
+  { slug: "v-maluku", cat: "event", title: { en: "Maluku MSS Workshop", id: "Lokakarya SPM Maluku" }, minutes: 3, youtube: SAMPLE_YT },
+  { slug: "v-campus", cat: "story", title: { en: "Campus Data Insight", id: "Campus Data Insight" }, minutes: 5, youtube: SAMPLE_YT },
+];
+
+export const tenderDetail = {
+  scope: { en: "Supply of the services described in the attached Request for Tender, Terms of Reference and tender forms.", id: "Penyediaan jasa sebagaimana diuraikan dalam Permintaan Tender, Kerangka Acuan, dan formulir tender terlampir." },
+  docs: ["RFT document (PDF)", "Annex 1 – Terms of Reference (PDF)", "Annex 2–7 – Tender forms (DOCX)", "Addendum No. 1 (PDF)"],
+};

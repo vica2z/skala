@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Info from "@/components/Info";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Cover, PageHero, PubCard, ShareBar } from "@/components/ui";
@@ -33,7 +34,7 @@ export default async function PublicationDetail({ params }: P) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <PageHero
+      <PageHero lang={lang} info="metadata"
         title={t(p.title, lang)}
         crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("publications", lang), href: `/${lang}/publications` }, { label: t(pubTypes[p.type], lang), href: `/${lang}/publications?type=${p.type}` }]}
       />
@@ -41,14 +42,18 @@ export default async function PublicationDetail({ params }: P) {
         <div className="lg:col-span-2 space-y-6">
           <p className="text-lg leading-relaxed">{t(p.summary, lang)}</p>
           <section aria-labelledby="pv">
-            <h2 id="pv" className="font-bold text-lg mb-3">{tr("preview", lang)}</h2>
-            <iframe title={`${tr("preview", lang)}: ${t(p.title, lang)}`} src="/sample-publication.pdf#view=FitH" className="w-full h-[640px] rounded-xl border border-slate-200 bg-slate-50" />
+            <h2 id="pv" className="font-bold text-lg mb-3">{tr("preview", lang)} <Info k="preview" lang={lang} /></h2>
+            <iframe title={`${tr("preview", lang)}: ${t(p.title, lang)}`} src="/sample-publication.pdf#view=FitH" className="hidden md:block w-full h-[640px] rounded-xl border border-slate-200 bg-slate-50" />
+            <a href="/sample-publication.pdf" target="_blank" rel="noreferrer" className="md:hidden flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <span className="grid h-14 w-11 shrink-0 place-items-center rounded-md bg-white text-xs font-bold text-red-600 shadow">PDF</span>
+              <span><span className="block font-semibold">{lang === "id" ? "Buka pratinjau" : "Open preview"}</span><span className="block text-sm text-slate-500">{p.pages} {lang === "id" ? "halaman" : "pages"}</span></span>
+            </a>
           </section>
           <ShareBar lang={lang} title={t(p.title, lang)} />
         </div>
         <aside className="space-y-5">
           <div className="max-w-56"><Cover seed={p.slug} label={t(pubTypes[p.type], lang)} tall /></div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2"><p className="text-sm font-semibold flex items-center gap-2">{lang === "id" ? "Unduh dokumen" : "Download"} <Info k="downloads" lang={lang} /></p>
             <a href="/sample-publication.pdf" download className="rounded-full bg-brand-600 text-white text-center px-5 py-3 font-bold hover:bg-brand-700">{tr("downloadPdf", lang)} · {p.pages} pp</a>
             <a href="/sample-publication.pdf" download className="rounded-full border border-brand-600 text-brand-700 text-center px-5 py-3 font-semibold hover:bg-brand-50">{tr("downloadWord", lang)}</a>
           </div>
@@ -64,7 +69,7 @@ export default async function PublicationDetail({ params }: P) {
       </div>
       {related.length > 0 && (
         <section className="mx-auto max-w-7xl px-4">
-          <h2 className="text-2xl font-extrabold text-brand-900 mb-6">{tr("related", lang)}</h2>
+          <h2 className="text-2xl font-extrabold text-brand-900 mb-6">{tr("related", lang)} <Info k="related" lang={lang} /></h2>
           <div className="grid gap-6 md:grid-cols-3">{related.map((r) => <PubCard key={r.slug} p={r} lang={lang} />)}</div>
         </section>
       )}

@@ -8,7 +8,7 @@ export default async function About({ params }: { params: Promise<{ lang: string
   const periods = ["RPJMN 2015–2019", "RPJMN 2020–2024", "RPJMN 2025–2029"];
   return (
     <>
-      <PageHero title={tr("about", lang)} intro={tr("partnership", lang)} crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("about", lang) }]} />
+      <PageHero lang={lang} info="outcomes" title={tr("about", lang)} intro={tr("partnership", lang)} crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("about", lang) }]} />
       <div className="mx-auto max-w-4xl px-4 py-10 space-y-12">
         <section>
           <h2 className="text-2xl font-extrabold text-brand-900">{tr("goal", lang)}</h2>

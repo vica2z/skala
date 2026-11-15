@@ -11,7 +11,7 @@ export default async function Developers({ params }: { params: Promise<{ lang: s
   ];
   return (
     <>
-      <PageHero title={tr("developers", lang)}
+      <PageHero lang={lang} info="api" title={tr("developers", lang)}
         intro={lang === "id" ? "API baca-saja dengan versi untuk Pusat Manajemen Pengetahuan (KMC) dan platform lain. Setiap item membawa ID SKALA One." : "A versioned, read-only API for the Knowledge Management Centre and other platforms. Every item carries its SKALA One ID."}
         crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("developers", lang) }]} />
       <div className="mx-auto max-w-5xl px-4 py-10">

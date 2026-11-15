@@ -1,6 +1,7 @@
 import { PageHero } from "@/components/ui";
 import { isLang, t, tr, type Lang } from "@/lib/i18n";
-import { governanceCycle } from "@/lib/data";
+import { governanceCycle, SAMPLE_YT } from "@/lib/data";
+import YouTube from "@/components/YouTube";
 
 export default async function Governance({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
@@ -8,7 +9,7 @@ export default async function Governance({ params }: { params: Promise<{ lang: s
   const R = 150, C = 200;
   return (
     <>
-      <PageHero title={tr("governance", lang)}
+      <PageHero lang={lang} info="governance" title={tr("governance", lang)}
         intro={lang === "id" ? "Siklus delapan langkah dari data hingga pembaruan data. Pilih satu langkah untuk mempelajarinya." : "An eight-step cycle from data to updated data. Open a step to learn more."}
         crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("governance", lang) }]} />
       <div className="mx-auto max-w-6xl px-4 py-10 grid gap-10 lg:grid-cols-2 items-center">
@@ -32,6 +33,7 @@ export default async function Governance({ params }: { params: Promise<{ lang: s
               <details className="rounded-xl border border-slate-200 p-4 open:bg-brand-50">
                 <summary className="cursor-pointer font-semibold">{i + 1}. {t(s, lang)}</summary>
                 <p className="mt-2 text-slate-700">{lang === "id" ? "Penjelasan singkat dan video untuk langkah ini (contoh)." : "A short explanation and video for this step (sample)."}</p>
+                <div className="mt-3"><YouTube id={SAMPLE_YT} title={t(s, lang)} lang={lang} /></div>
               </details>
             </li>
           ))}

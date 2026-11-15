@@ -1,5 +1,6 @@
 "use client";
 
+import Info from "@/components/Info";
 import { useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { t, tr, type Lang } from "@/lib/i18n";
@@ -8,13 +9,14 @@ import { PubCard } from "./ui";
 
 const PAGE = 8;
 
-export default function PubExplorer({ lang }: { lang: Lang }) {
+export default function PubExplorer({ lang, lockedType }: { lang: Lang; lockedType?: string }) {
   const sp = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const [q, setQ] = useState(sp.get("q") ?? "");
   const [shown, setShown] = useState(PAGE);
-  const type = sp.get("type") ?? "";
+  const [showF, setShowF] = useState(false);
+  const type = lockedType ?? sp.get("type") ?? "";
   const theme = sp.get("theme") ?? "";
   const province = sp.get("province") ?? "";
   const year = sp.get("year") ?? "";
@@ -42,13 +44,20 @@ export default function PubExplorer({ lang }: { lang: Lang }) {
   const sel = "w-full rounded-lg border border-slate-300 px-3 py-2 bg-white";
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 grid gap-8 lg:grid-cols-4">
-      <aside className="lg:col-span-1 space-y-5" aria-label={tr("filters", lang)}>
+      <aside className="lg:col-span-1" aria-label={tr("filters", lang)}>
+        <button type="button" onClick={() => setShowF(!showF)} aria-expanded={showF} aria-controls="pf"
+          className="lg:hidden flex w-full items-center justify-between rounded-2xl border border-slate-200 px-4 py-3 font-bold text-brand-900">
+          <span>{tr("filters", lang)}{[type && !lockedType, theme, province, year, q].filter(Boolean).length > 0 ? ` (${[type && !lockedType, theme, province, year, q].filter(Boolean).length})` : ""}</span>
+          <span className={`transition ${showF ? "rotate-180" : ""}`} aria-hidden>▾</span>
+        </button>
+        <div id="pf" className={`${showF ? "block" : "hidden"} lg:block mt-4 space-y-5 lg:mt-0`}>
         <div>
-          <label htmlFor="pq" className="font-semibold text-sm">{tr("search", lang)}</label>
+          <p className="flex items-center gap-2 font-bold text-brand-900">{tr("filters", lang)} <Info k="repository" lang={lang} /></p>
+        <label htmlFor="pq" className="font-semibold text-sm">{tr("search", lang)}</label>
           <input id="pq" type="search" value={q} onChange={(e) => { setQ(e.target.value); setShown(PAGE); }}
             placeholder={tr("searchPlaceholder", lang)} className={sel + " mt-1"} />
         </div>
-        <fieldset>
+        {!lockedType && (<fieldset>
           <legend className="font-semibold text-sm mb-2">{tr("type", lang)}</legend>
           <div className="flex flex-wrap gap-2">
             {[["", tr("all", lang)] as [string, string], ...Object.entries(pubTypes).map(([k, v]) => [k, t(v, lang)] as [string, string])].map(([k, v]) => (
@@ -56,7 +65,7 @@ export default function PubExplorer({ lang }: { lang: Lang }) {
                 className={`rounded-full px-3 py-1 text-sm border ${type === k ? "bg-brand-600 text-white border-brand-600" : "border-slate-300 hover:bg-brand-50"}`}>{v}</button>
             ))}
           </div>
-        </fieldset>
+        </fieldset>)}
         <div>
           <label htmlFor="ft" className="font-semibold text-sm">{tr("theme", lang)}</label>
           <select id="ft" className={sel + " mt-1"} value={theme} onChange={(e) => set("theme", e.target.value)}>
@@ -79,6 +88,7 @@ export default function PubExplorer({ lang }: { lang: Lang }) {
           </select>
         </div>
         <button className="text-sm font-semibold text-brand-700 hover:underline" onClick={() => { setQ(""); router.replace(pathname); }}>{tr("clear", lang)}</button>
+        </div>
       </aside>
 
       <section className="lg:col-span-3" aria-live="polite">

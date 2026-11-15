@@ -8,7 +8,7 @@ export default async function Publications({ params }: { params: Promise<{ lang:
   const lang = (isLang(raw) ? raw : "id") as Lang;
   return (
     <>
-      <PageHero
+      <PageHero lang={lang} info="repository"
         title={tr("publications", lang)}
         intro={lang === "id"
           ? "Semua produk pengetahuan SKALA di satu tempat: cari, saring berdasarkan jenis, tema, provinsi, dan tahun, lalu pratinjau sebelum mengunduh."

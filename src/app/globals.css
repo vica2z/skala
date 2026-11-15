@@ -17,3 +17,4 @@ html { font-size: var(--base-size, 16px); scroll-behavior: smooth; }
 body { color: var(--color-ink); background: #fff; }
 :focus-visible { outline: 3px solid var(--color-accent-500); outline-offset: 2px; }
 .prose p { margin: 0 0 1rem; line-height: 1.75; }
+

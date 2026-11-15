@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Cover, PageHero, PostCard, ShareBar } from "@/components/ui";
 import { fmtDate, isLang, langs, t, tr, type Lang } from "@/lib/i18n";
-import { posts, themes } from "@/lib/data";
+import { posts, themes, SAMPLE_YT } from "@/lib/data";
+import YouTube from "@/components/YouTube";
 
 export function generateStaticParams() {
   return langs.flatMap((lang) => posts.map((p) => ({ lang, slug: p.slug })));
@@ -25,12 +26,13 @@ export default async function Article({ params }: P) {
   const more = posts.filter((x) => x.slug !== p.slug && x.kind === p.kind).slice(0, 3);
   return (
     <>
-      <PageHero title={t(p.title, lang)} crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("activities", lang), href: `/${lang}/activities` }]} />
+      <PageHero lang={lang} info="news" title={t(p.title, lang)} crumbs={[{ label: tr("home", lang), href: `/${lang}` }, { label: tr("activities", lang), href: `/${lang}/activities` }]} />
       <article className="mx-auto max-w-3xl px-4 py-10">
         <p className="text-sm text-slate-500">{fmtDate(p.date, lang)} · <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-brand-700">{t(themes[p.theme], lang)}</span></p>
         <div className="mt-6"><Cover seed={p.slug} label={tr("activityUpdates", lang)} /></div>
         <p className="mt-8 text-xl italic text-slate-700">{t(p.lead, lang)}</p>
         <div className="prose mt-6 text-lg">{p.body.map((b, i) => <p key={i}>{t(b, lang)}</p>)}</div>
+        <div className="mt-8"><YouTube id={SAMPLE_YT} title={t(p.title, lang)} lang={lang} /></div>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3" aria-label="Gallery">
           {[1, 2, 3, 4].map((i) => <Cover key={i} seed={p.slug + i} label={`${i}/4`} />)}
         </div>
