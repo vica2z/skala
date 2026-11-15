@@ -50,7 +50,7 @@ export default async function LangLayout({ children, params }: { children: React
           </div>
           <div className="border-t border-white/10">
             <div className="mx-auto max-w-7xl px-4 py-4 flex flex-col md:flex-row justify-between gap-2 text-xs opacity-80">
-              <span>© 2026 SKALA · {tr("managedBy", lang)} · {tr("prototypeBy", lang)} <a className="underline hover:text-white" href="https://www.techtarn.com" target="_blank" rel="noopener noreferrer">TECHTARN</a></span>
+              <span>© 2026 SKALA · {tr("prototypeBy", lang)} <a className="underline hover:text-white" href="https://www.techtarn.com" target="_blank" rel="noopener noreferrer">TECHTARN</a></span>
               <span>{tr("banner", lang)} · <a className="underline" href="/rss.xml">RSS</a></span>
             </div>
           </div>
