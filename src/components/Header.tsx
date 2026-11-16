@@ -67,22 +67,22 @@ export default function Header({ lang }: { lang: Lang }) {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-3 lg:gap-6">
-        <Link href={`/${lang}`} className="flex items-center gap-2 shrink-0" aria-label="SKALA">
-          <span className="grid place-items-center h-10 w-10 rounded-xl bg-brand-600 text-white font-black">S</span>
+      <div className="mx-auto max-w-7xl px-4 py-3 flex flex-wrap items-center gap-x-3 gap-y-2 lg:gap-x-6">
+        <Link href={`/${lang}`} className="flex min-w-0 items-center gap-2" aria-label="SKALA">
+          <span className="grid shrink-0 place-items-center h-10 w-10 rounded-xl bg-brand-600 text-white font-black">S</span>
           <span className="leading-tight">
             <span className="block font-extrabold tracking-wide text-brand-900">SKALA</span>
             <span className="hidden sm:block text-[11px] text-slate-500">Australia–Indonesia Partnership</span>
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-0.5 text-[15px] font-medium whitespace-nowrap" aria-label="Main">
+        <nav className="hidden lg:flex flex-wrap items-center gap-0.5 text-[15px] font-medium whitespace-nowrap" aria-label="Main">
           {nav.map((n) =>
             n.children ? (
               <div key={n.label} className="relative group">
                 <button className="px-3 py-2 rounded-lg hover:bg-brand-50" aria-haspopup="true">{n.label} ▾</button>
-                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition absolute left-0 top-full pt-2">
-                  <ul className={`${n.children.length > 6 ? "grid grid-cols-2 w-[30rem]" : "min-w-60"} rounded-xl border border-slate-200 bg-white shadow-lg p-2`}>
+                <div className={`hidden group-hover:block group-focus-within:block absolute top-full pt-2 z-50 ${n.children.length > 6 ? "left-1/2 -translate-x-1/2" : "left-0"}`}>
+                  <ul className={`${n.children.length > 6 ? "grid grid-cols-2 w-[min(30rem,calc(100vw-2rem))]" : "min-w-60"} rounded-xl border border-slate-200 bg-white shadow-lg p-2`}>
                     {n.children.map((c) => (
                       <li key={c.href}><Link className="block rounded-lg px-3 py-2 hover:bg-brand-50" href={c.href}>{c.label}</Link></li>
                     ))}
@@ -103,7 +103,7 @@ export default function Header({ lang }: { lang: Lang }) {
         >
           <label htmlFor="hq" className="sr-only">{tr("search", lang)}</label>
           <input id="hq" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tr("searchPlaceholder", lang)}
-            className="w-56 xl:w-64 rounded-full border border-slate-300 px-4 py-2 text-sm focus:border-brand-500" />
+            className="w-56 min-w-0 rounded-full border border-slate-300 px-4 py-2 text-sm focus:border-brand-500" />
           <span className="ml-1.5"><Info k="siteSearch" lang={lang} align="right" /></span>
         </form>
 
@@ -114,7 +114,7 @@ export default function Header({ lang }: { lang: Lang }) {
 
         <span className="shrink-0"><Info k="bilingual" lang={lang} align="right" /></span>
 
-        <button className="lg:hidden rounded-lg border px-3 py-2" aria-expanded={open} aria-controls="mnav" onClick={() => setOpen(!open)}>
+        <button className="lg:hidden shrink-0 rounded-lg border px-3 py-2" aria-expanded={open} aria-controls="mnav" onClick={() => setOpen(!open)}>
           ☰<span className="sr-only">Menu</span>
         </button>
       </div>

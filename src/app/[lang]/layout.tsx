@@ -26,8 +26,8 @@ export default async function LangLayout({ children, params }: { children: React
         <Header lang={lang} />
         <main id="main">{children}</main>
         <footer className="mt-20 bg-brand-900 text-brand-100">
-          <div className="mx-auto max-w-7xl px-4 py-14 grid gap-10 md:grid-cols-5 text-sm">
-            <div className="md:col-span-2">
+          <div className="mx-auto max-w-7xl px-4 py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 text-sm">
+            <div className="sm:col-span-2">
               <p className="text-white font-extrabold text-xl">SKALA</p>
               <p className="mt-2 max-w-md">{tr("partnership", lang)}</p>
               <div className="mt-4 flex flex-wrap gap-2" aria-label="Partners">

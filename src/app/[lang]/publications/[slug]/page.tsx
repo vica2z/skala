@@ -63,7 +63,7 @@ export default async function PublicationDetail({ params }: P) {
             <dt className="text-slate-500">{tr("theme", lang)}</dt><dd className="col-span-2"><Link className="text-brand-700 hover:underline" href={`/${lang}/publications?theme=${p.theme}`}>{t(themes[p.theme], lang)}</Link></dd>
             {prov && (<><dt className="text-slate-500">{tr("province", lang)}</dt><dd className="col-span-2">{t(prov.name, lang)}</dd></>)}
             <dt className="text-slate-500">SKALA One ID</dt><dd className="col-span-2 font-mono">{p.skalaOneId}</dd>
-            <dt className="text-slate-500">{tr("downloads", lang)}</dt><dd className="col-span-2">{p.downloads.toLocaleString(lang === "id" ? "id-ID" : "en-GB")}</dd>
+            <dt className="text-slate-500 break-words hyphens-auto">{tr("downloads", lang)}</dt><dd className="col-span-2">{p.downloads.toLocaleString(lang === "id" ? "id-ID" : "en-GB")}</dd>
           </dl>
         </aside>
       </div>

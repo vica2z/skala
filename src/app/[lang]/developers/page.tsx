@@ -19,7 +19,7 @@ export default async function Developers({ params }: { params: Promise<{ lang: s
           {rows.map(([m, p, d]) => (
             <li key={p} className="rounded-xl border border-slate-200 p-4">
               <span className="rounded bg-emerald-100 text-emerald-800 px-2 py-0.5 text-xs font-bold mr-2">{m}</span>
-              <a className="font-mono text-brand-700 hover:underline" href={p}>{p}</a>
+              <a className="font-mono break-all text-brand-700 hover:underline" href={p}>{p}</a>
               <p className="text-sm text-slate-600 mt-1">{d}</p>
             </li>
           ))}
